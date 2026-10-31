@@ -2,9 +2,12 @@ import datetime
 from http.server import BaseHTTPRequestHandler
 from pathlib import Path
 
-# Load template SVG on cold start
+# Load template SVG on startup
 TEMPLATE_SVG = ""
 for candidate in [
+    Path(__file__).parent / "banner_template.svg",
+    Path(__file__).parent.parent / "banner_template.svg",
+    Path("banner_template.svg"),
     Path(__file__).parent / "sun_moon_clock.svg",
     Path(__file__).parent.parent / "sun_moon_clock.svg",
     Path("sun_moon_clock.svg"),
@@ -26,19 +29,27 @@ class handler(BaseHTTPRequestHandler):
         d_hour = -(t % 43200)
         d_min = -(t % 3600)
 
-        # Substitute time offsets into SVG (hand styles first, then general day/night delays)
-        svg = (
-            TEMPLATE_SVG
-            .replace(
-                'class="hand-hour" style="animation-delay: -36600s;"',
-                f'class="hand-hour" style="animation-delay: {d_hour}s;"',
+        # Substitute delays into template
+        if "__DAY_DELAY__" in TEMPLATE_SVG:
+            svg = (
+                TEMPLATE_SVG
+                .replace("__HOUR_DELAY__", str(d_hour))
+                .replace("__MIN_DELAY__", str(d_min))
+                .replace("__DAY_DELAY__", str(d_day))
             )
-            .replace(
-                'class="hand-min" style="animation-delay: -600s;"',
-                f'class="hand-min" style="animation-delay: {d_min}s;"',
+        else:
+            svg = (
+                TEMPLATE_SVG
+                .replace(
+                    'class="hand-hour" style="animation-delay: -36600s;"',
+                    f'class="hand-hour" style="animation-delay: {d_hour}s;"',
+                )
+                .replace(
+                    'class="hand-min" style="animation-delay: -600s;"',
+                    f'class="hand-min" style="animation-delay: {d_min}s;"',
+                )
+                .replace("animation-delay: -36600s;", f"animation-delay: {d_day}s;")
             )
-            .replace("animation-delay: -36600s;", f"animation-delay: {d_day}s;")
-        )
 
         content = svg.encode("utf-8")
 
