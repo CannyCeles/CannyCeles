@@ -1,16 +1,22 @@
-## Hi 👋
+<div align="center">
 
-<!--
-**CannyCeles/CannyCeles** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<table>
+  <tr>
+    <td width="270" align="center" valign="middle">
+      <img src="https://cannyceles.vercel.app/api/clock" width="240" height="240" alt="Jakarta Sun & Moon Clock" />
+    </td>
+    <td valign="middle" align="left">
 
-Here are some ideas to get you started:
+```ini
+cele@jakarta
+-------------------
+OS:       Debian GNU/Linux 13 (Trixie) · Wayland
+Timezone: Asia/Jakarta (WIB · UTC+7)
+Stack:    tba hehe
+```
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+   </td>
+  </tr>
+</table>
+
+</div>
